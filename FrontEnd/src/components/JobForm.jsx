@@ -47,13 +47,20 @@ export default function JobForm({ addJob, updateJob, jobs }) {
 
       <form className="job-form" onSubmit={handleSubmit}>
         <input
+          placeholder="Company Name"
           name="company"
           value={form.company}
           onChange={handleChange}
           required
         />
 
-        <input name="role" value={form.role} onChange={handleChange} required />
+        <input
+          name="role"
+          placeholder="Role you applied"
+          value={form.role}
+          onChange={handleChange}
+          required
+        />
 
         <select name="status" value={form.status} onChange={handleChange}>
           <option value="Applied">Applied</option>
@@ -62,7 +69,12 @@ export default function JobForm({ addJob, updateJob, jobs }) {
           <option value="Rejected">Rejected</option>
         </select>
 
-        <textarea name="notes" value={form.notes} onChange={handleChange} />
+        <textarea
+          name="notes"
+          placeholder="Notes..."
+          value={form.notes}
+          onChange={handleChange}
+        />
 
         <button type="submit">{editingJob ? "Update" : "Save"}</button>
       </form>

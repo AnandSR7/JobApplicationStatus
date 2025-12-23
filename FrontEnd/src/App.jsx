@@ -3,7 +3,12 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
 import JobForm from "./components/JobForm";
 import Navbar from "./components/Navbar";
-import { fetchJobs, addJobApi } from "./services/api";
+import {
+  updateJobApi,
+  deleteJobApi,
+  fetchJobs,
+  addJobApi,
+} from "./services/api";
 
 export default function App() {
   const [jobs, setJobs] = useState([]);
@@ -17,13 +22,29 @@ export default function App() {
     const savedJob = await addJobApi(job);
     setJobs([...jobs, savedJob]);
   }
-
+  async function deleteJob(id) {
+    await deleteJobApi(id);
+    setJobs(jobs.filter((j) => j.id !== id));
+  }
+  async function updateJob(id, job) {
+    const updated = await updateJobApi(id, job);
+    setJobs(jobs.map((j) => (j.id === id ? updated : j)));
+  }
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Dashboard jobs={jobs} />} />
+        <Route
+          path="/"
+          element={<Dashboard jobs={jobs} onDelete={deleteJob} />}
+        />
         <Route path="/add" element={<JobForm addJob={addJob} />} />
+        <Route
+          path="/edit/:id"
+          element={
+            <JobForm jobs={jobs} addJob={addJob} updateJob={updateJob} />
+          }
+        />
       </Routes>
     </>
   );

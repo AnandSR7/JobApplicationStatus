@@ -4,7 +4,7 @@ export default function Navbar() {
   const isAddPage = location.pathname === "/add";
   return (
     <nav className="navbar">
-      <h3>JobTracker</h3>
+      <h2 className="Gradient">JobTracker</h2>
       <div className="nav-links">
         {!isAddPage ? (
           <button className="add-btn">

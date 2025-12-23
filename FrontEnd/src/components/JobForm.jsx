@@ -1,15 +1,29 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function JobForm({ addJob }) {
+export default function JobForm({ addJob, updateJob, jobs }) {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const [form, setForm] = useState({
     company: "",
     role: "",
-    status: "Applied", // default enum value
+    status: "Applied",
     notes: "",
   });
+
+  const editingJob = jobs?.find((j) => j.id === id);
+
+  useEffect(() => {
+    if (editingJob) {
+      setForm({
+        company: editingJob.company,
+        role: editingJob.role,
+        status: editingJob.status,
+        notes: editingJob.notes || "",
+      });
+    }
+  }, [editingJob]);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -18,34 +32,28 @@ export default function JobForm({ addJob }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    try {
+    if (editingJob) {
+      await updateJob(id, form);
+    } else {
       await addJob(form);
-      navigate("/");
-    } catch (err) {
-      console.error("Save failed:", err.message);
     }
+
+    navigate("/");
   }
 
   return (
     <div className="job-form-container">
-      <h2>Add Job Application</h2>
+      <h2>{editingJob ? "Edit Job" : "Add Job"}</h2>
 
       <form className="job-form" onSubmit={handleSubmit}>
         <input
           name="company"
-          placeholder="Company Name"
           value={form.company}
           onChange={handleChange}
           required
         />
 
-        <input
-          name="role"
-          placeholder="Job Title"
-          value={form.role}
-          onChange={handleChange}
-          required
-        />
+        <input name="role" value={form.role} onChange={handleChange} required />
 
         <select name="status" value={form.status} onChange={handleChange}>
           <option value="Applied">Applied</option>
@@ -54,14 +62,9 @@ export default function JobForm({ addJob }) {
           <option value="Rejected">Rejected</option>
         </select>
 
-        <textarea
-          name="notes"
-          placeholder="Notes"
-          value={form.notes}
-          onChange={handleChange}
-        />
+        <textarea name="notes" value={form.notes} onChange={handleChange} />
 
-        <button type="submit">Save</button>
+        <button type="submit">{editingJob ? "Update" : "Save"}</button>
       </form>
     </div>
   );

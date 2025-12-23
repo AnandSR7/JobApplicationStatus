@@ -21,4 +21,34 @@ public class JobsController : ControllerBase
         Jobs.Add(job);
         return Ok(job);
     }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteJob(Guid id)
+    {
+        var job = Jobs.FirstOrDefault(j => j.Id == id);
+        if (job == null)
+        {
+            return NotFound();
+        }
+        Jobs.Remove(job);
+        return NoContent();
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult UpdateJob(Guid id, [FromBody] JobApplication updatedJob)
+    {
+        var job = Jobs.FirstOrDefault(j => j.Id == id);
+        if (job == null)
+        {
+            return NotFound();
+        }
+
+        job.Company = updatedJob.Company;
+        job.Role = updatedJob.Role;
+        job.Status = updatedJob.Status;
+        job.Notes = updatedJob.Notes;
+        job.AppliedDate = updatedJob.AppliedDate;
+
+        return Ok(job);
+    }
 }

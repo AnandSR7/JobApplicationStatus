@@ -5,11 +5,19 @@ export async function fetchJobs() {
   return res.json();
 }
 
-export async function addJob(job) {
-  const res = await fetch(API_URL, {
+export async function addJobApi(job) {
+  const response = await fetch(API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(job),
   });
-  return res.json();
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(error);
+  }
+
+  return response.json();
 }

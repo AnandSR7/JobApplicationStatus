@@ -16,11 +16,11 @@ public class JobApplication
 
     [Required]
     [MaxLength(100)]
-    public string Company { get; set; }
+    public required string Company { get; set; }
 
     [Required]
     [MaxLength(100)]
-    public string Role { get; set; }
+    public required string Role { get; set; }
 
     [Required]
     public JobStatus Status { get; set; }

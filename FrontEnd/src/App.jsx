@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
 import JobForm from "./components/JobForm";
 import Navbar from "./components/Navbar";
-import { fetchJobs, addJob } from "./services/api";
+import { fetchJobs, addJobApi } from "./services/api";
 
 export default function App() {
   const [jobs, setJobs] = useState([]);
@@ -12,8 +12,9 @@ export default function App() {
     fetchJobs().then(setJobs);
   }, []);
 
-  async function handleAddJob(job) {
-    const savedJob = await addJob(job);
+  // Save job to backend
+  async function addJob(job) {
+    const savedJob = await addJobApi(job);
     setJobs([...jobs, savedJob]);
   }
 
@@ -22,7 +23,7 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Dashboard jobs={jobs} />} />
-        <Route path="/add" element={<JobForm addJob={handleAddJob} />} />
+        <Route path="/add" element={<JobForm addJob={addJob} />} />
       </Routes>
     </>
   );

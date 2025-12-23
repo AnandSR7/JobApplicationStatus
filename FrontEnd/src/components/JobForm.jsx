@@ -1,22 +1,31 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 export default function JobForm({ addJob }) {
   const navigate = useNavigate();
+
   const [form, setForm] = useState({
     company: "",
     role: "",
-    status: "",
+    status: "Applied", // default enum value
     notes: "",
   });
+
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
-  function handleSubmit(e) {
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log("Form submitted", form);
-    addJob(form);
-    navigate("/");
+
+    try {
+      await addJob(form);
+      navigate("/");
+    } catch (err) {
+      console.error("Save failed:", err.message);
+    }
   }
+
   return (
     <div className="job-form-container">
       <h2>Add Job Application</h2>
@@ -27,6 +36,7 @@ export default function JobForm({ addJob }) {
           placeholder="Company Name"
           value={form.company}
           onChange={handleChange}
+          required
         />
 
         <input
@@ -34,13 +44,14 @@ export default function JobForm({ addJob }) {
           placeholder="Job Title"
           value={form.role}
           onChange={handleChange}
+          required
         />
 
         <select name="status" value={form.status} onChange={handleChange}>
-          <option>Applied</option>
-          <option>Interview</option>
-          <option>Offer</option>
-          <option>Rejected</option>
+          <option value="Applied">Applied</option>
+          <option value="Interview">Interview</option>
+          <option value="Offer">Offer</option>
+          <option value="Rejected">Rejected</option>
         </select>
 
         <textarea

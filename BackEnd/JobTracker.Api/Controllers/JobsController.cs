@@ -16,7 +16,7 @@ public class JobsController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult AddJob(JobApplication job)
+    public IActionResult AddJob([FromBody]JobApplication job)
     {
         Jobs.Add(job);
         return Ok(job);

@@ -1,11 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 export default function Navbar() {
+  const location = useLocation();
+  const isAddPage = location.pathname === "/add";
   return (
     <nav className="navbar">
-      <h3>Job Application Tracker</h3>
-      <Link to="/add" className="add-btn">
-        Add Job
-      </Link>
+      <h3>JobTracker</h3>
+      <div className="nav-links">
+        {!isAddPage ? (
+          <button className="add-btn">
+            <Link to="/add">Add Job</Link>
+          </button>
+        ) : (
+          <button className="add-btn">
+            <Link to="/">My Applications</Link>
+          </button>
+        )}
+      </div>
     </nav>
   );
 }

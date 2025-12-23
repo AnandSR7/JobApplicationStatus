@@ -19,6 +19,7 @@ C:\JSLearn\JobTracker\BackEnd\JobTracker.Api\obj\Debug\net9.0\JobTracker.Api.Ass
 C:\JSLearn\JobTracker\BackEnd\JobTracker.Api\obj\Debug\net9.0\JobTracker.Api.csproj.CoreCompileInputs.cache
 C:\JSLearn\JobTracker\BackEnd\JobTracker.Api\obj\Debug\net9.0\JobTracker.Api.MvcApplicationPartsAssemblyInfo.cs
 C:\JSLearn\JobTracker\BackEnd\JobTracker.Api\obj\Debug\net9.0\JobTracker.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\JSLearn\JobTracker\BackEnd\JobTracker.Api\obj\Debug\net9.0\JobTracker.Api.sourcelink.json
 C:\JSLearn\JobTracker\BackEnd\JobTracker.Api\obj\Debug\net9.0\rjimswa.dswa.cache.json
 C:\JSLearn\JobTracker\BackEnd\JobTracker.Api\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
 C:\JSLearn\JobTracker\BackEnd\JobTracker.Api\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json

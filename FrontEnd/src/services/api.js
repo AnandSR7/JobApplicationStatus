@@ -31,6 +31,17 @@ export async function deleteJobApi(id) {
   });
 }
 
+// Fetch details of a specific job
+export async function fetchJobById(id) {
+  const response = await fetch(`${API_URL}/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch job details");
+  }
+
+  return response.json();
+}
+
 //To update a specific job
 export async function updateJobApi(id, job) {
   const response = await fetch(`${API_URL}/${id}`, {

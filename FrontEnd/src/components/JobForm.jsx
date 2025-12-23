@@ -43,7 +43,9 @@ export default function JobForm({ addJob, updateJob, jobs }) {
 
   return (
     <div className="job-form-container">
-      <h2>{editingJob ? "Edit Job" : "Add Job"}</h2>
+      <h2>
+        {editingJob ? "Edit Application details" : "Add Application details"}
+      </h2>
 
       <form className="job-form" onSubmit={handleSubmit}>
         <input

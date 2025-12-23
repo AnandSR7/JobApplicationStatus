@@ -323,3 +323,55 @@ h2 {
   transform: translateY(-2px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
+
+.job-actions {
+  position: relative;
+}
+
+/*Notes*/
+.note-popover {
+  position: absolute;
+  top: 40px;
+  right: 0;
+
+  /* auto-size based on text */
+  width: fit-content;
+  max-width: 280px;
+
+  /* height control */
+  max-height: 180px;
+  overflow-y: auto;
+
+  padding: 10px 12px;
+
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #374151;
+
+  white-space: normal;
+  word-break: break-word;
+
+  z-index: 20;
+}
+
+/*Empty state*/
+.empty-state {
+  margin-top: 60px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.empty-state-image {
+  width: 580px;
+  opacity: 0.55;
+  margin-bottom: 16px;
+}
+
+.empty-subtext {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}

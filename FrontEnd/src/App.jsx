@@ -8,6 +8,7 @@ import {
   deleteJobApi,
   fetchJobs,
   addJobApi,
+  fetchJobById,
 } from "./services/api";
 
 export default function App() {
@@ -30,13 +31,24 @@ export default function App() {
     const updated = await updateJobApi(id, job);
     setJobs(jobs.map((j) => (j.id === id ? updated : j)));
   }
+  async function getJobDetails(id) {
+    const jobDetails = await fetchJobById(id);
+    return jobDetails;
+  }
+
   return (
     <>
       <Navbar />
       <Routes>
         <Route
           path="/"
-          element={<Dashboard jobs={jobs} onDelete={deleteJob} />}
+          element={
+            <Dashboard
+              jobs={jobs}
+              onDelete={deleteJob}
+              onFetchDetails={getJobDetails}
+            />
+          }
         />
         <Route path="/add" element={<JobForm addJob={addJob} />} />
         <Route

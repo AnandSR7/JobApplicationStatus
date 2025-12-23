@@ -15,6 +15,17 @@ public class JobsController : ControllerBase
         return Ok(Jobs);
     }
 
+     [HttpGet("{id}")]
+    public IActionResult GetJobDetails(Guid id)
+    {
+        var job = Jobs.FirstOrDefault(j => j.Id == id);
+        if (job == null)
+        {
+            return NotFound();
+        }
+        return Ok(job);
+    }
+
     [HttpPost]
     public IActionResult AddJob([FromBody]JobApplication job)
     {
